@@ -105,10 +105,18 @@ namespace AspNetCore.Identity.CosmosDb.Extensions
                     {
                         OnValidatePrincipal = SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>
                     };
+                    o.ExpireTimeSpan = cookieExpireTimeSpan;
+                    o.SlidingExpiration = slidingExpiration;
                 })
                 .AddCookie(IdentityConstants.TwoFactorUserIdScheme, o =>
                 {
                     o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
+                    o.ExpireTimeSpan = cookieExpireTimeSpan;
+                    o.SlidingExpiration = slidingExpiration;
+                })
+                .AddCookie(IdentityConstants.BearerScheme, o =>
+                {
+                    o.Cookie.Name = IdentityConstants.BearerScheme;
                     o.ExpireTimeSpan = cookieExpireTimeSpan;
                     o.SlidingExpiration = slidingExpiration;
                 });
